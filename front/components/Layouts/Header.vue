@@ -8,9 +8,8 @@ import logo from '@/assets/svg/logo.svg';
     </div>
 </template>
 
-<style lang="scss">
+<style scoped lang="scss">
 .header {
-    background-color: black;
     height: 72px;
     display: flex;
     align-items: center;

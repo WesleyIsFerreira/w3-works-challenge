@@ -1,18 +1,20 @@
 <template>
     <div class="pi">
-        <div class="pi__box-1">
+        <!-- <div class="pi__box-1">
             <video class="pi__video" autoplay loop muted playsinline>
                 <source src="/videos/circle.mp4" type="video/mp4" />
                 Seu navegador não suporta vídeos em HTML5.
             </video>
-        </div>
-        <!-- <div class="pi__content">
-            <h1>Welcome to the homepage</h1>
         </div> -->
+        <div class="container">
+            <!-- <StepsZero /> -->
+            <!-- <StepsOne /> -->
+            <StepsTwo />
+        </div>
     </div>
 </template>
 
-<style lang="scss">
+<style scoped lang="scss">
 .pi {
     &__box-1 {
         position: relative;
@@ -30,8 +32,6 @@
         scale: 2.7;
     }
 
-    &__content {
-        color: white;
-    }
+
 }
 </style>

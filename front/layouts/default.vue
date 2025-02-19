@@ -2,13 +2,14 @@
     <div class="ld">
         <LayoutsHeader />
         <slot />
-        <LayoutsFooter />
+        <LayoutsFooter class="ld__footer" />
     </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 .ld {
-    background-color: black;
-    height: 100vh;
+    &__footer {
+        margin-top: 60px;
+    }
 }
 </style>
