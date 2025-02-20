@@ -17,8 +17,4 @@
     display: flex;
     flex-direction: column;
 }
-
-.quill-editor {
-    height: 300px;
-}
 </style>

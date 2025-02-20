@@ -1,3 +1,7 @@
+<script setup lang="ts">
+const emit = defineEmits(["click"]);
+</script>
+
 <template>
     <div class="one">
         <CoreTitle>Parabéns por chegar até aqui!</CoreTitle>
@@ -6,9 +10,9 @@
             talentoso e trabalhar em projetos desafiadores.
         </CoreParagraph>
         <CoreParagraph>
-            Tire uma copia do arquivo figma e envie para o email fornecido na vaga.
+            Tire uma cópia do arquivo Figma e envie para o email fornecido na vaga.
         </CoreParagraph>
-        <CoreBtn>
+        <CoreBtn @click="emit('click')">
             Iniciar quiz
         </CoreBtn>
     </div>
