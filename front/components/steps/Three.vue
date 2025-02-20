@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
+import Editor from 'primevue/editor';
+
 const questionThree = ref("");
 </script>
 
@@ -12,12 +14,11 @@ const questionThree = ref("");
             Escreva uma redação falando sobre o impacto das IAs na área da tecnologia.
         </CoreParagraph>
 
-
+        <Editor v-model="questionThree" editorStyle="height: 320px" />
 
         <CoreBtn>
-            Proximo
+            Finalizar
         </CoreBtn>
-
     </div>
 </template>
 
@@ -26,7 +27,5 @@ const questionThree = ref("");
     gap: 30px;
     display: flex;
     flex-direction: column;
-
-
 }
 </style>

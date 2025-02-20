@@ -1,15 +1,17 @@
 <template>
     <div class="pi">
-        <!-- <div class="pi__box-1">
+        <div class="pi__box-1">
             <video class="pi__video" autoplay loop muted playsinline>
                 <source src="/videos/circle.mp4" type="video/mp4" />
                 Seu navegador não suporta vídeos em HTML5.
             </video>
-        </div> -->
+        </div>
         <div class="container">
             <!-- <StepsZero /> -->
             <!-- <StepsOne /> -->
-            <StepsTwo />
+            <!-- <StepsTwo /> -->
+            <!-- <StepsThree /> -->
+            <StepsFour />
         </div>
     </div>
 </template>
@@ -31,7 +33,5 @@
         transform: translate(-18.5%, -19%);
         scale: 2.7;
     }
-
-
 }
 </style>
