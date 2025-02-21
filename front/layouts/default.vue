@@ -6,10 +6,10 @@
     </div>
 </template>
 
-<style scoped lang="scss">
+<!-- <style scoped lang="scss">
 .ld {
     &__footer {
         margin-top: 60px;
     }
 }
-</style>
+</style> -->

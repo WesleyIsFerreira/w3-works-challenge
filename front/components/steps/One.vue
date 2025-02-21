@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
+const emit = defineEmits(["click"]);
 
 const questionOne = ref("");
 
@@ -32,7 +33,7 @@ const options = [{
         </CoreParagraph>
 
         <div class="one__options">
-            <div class="one__option" v-for="opt in options" :key="opt.value">
+            <div class="one__option" v-for="opt in options" :key="opt.value" @click="questionOne = opt.value">
                 <label>
                     <input type="radio" :value="opt.value" v-model="questionOne" />
                     {{ opt.label }}
@@ -40,7 +41,7 @@ const options = [{
             </div>
         </div>
 
-        <CoreBtn>
+        <CoreBtn @click="emit('click', questionOne)">
             Proximo
         </CoreBtn>
 
@@ -63,11 +64,17 @@ const options = [{
         label {
             display: flex;
             gap: 10px;
+            cursor: pointer;
+        }
+
+        input {
+            cursor: pointer;
         }
 
         padding: 20px;
         background-color: $chineseBlack;
         color: $white;
+        cursor: pointer;
     }
 }
 </style>

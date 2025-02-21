@@ -9,6 +9,8 @@ import {
 } from "chart.js";
 import ChartDataLabels from "chartjs-plugin-datalabels";
 
+const emit = defineEmits(["click"]);
+
 ChartJS.register(Title, ArcElement, CategoryScale, ChartDataLabels);
 
 const chartData = ref({
@@ -30,8 +32,8 @@ const chartOptions = ref({
                 size: 10
             },
             formatter: (value: number, ctx: any) => {
-                let sum = ctx.chart.data.datasets[0].data.reduce((a: number, b: number) => a + b, 0);
-                let percentage = ((value / sum) * 100).toFixed(1) + "%";
+                const sum = ctx.chart.data.datasets[0].data.reduce((a: number, b: number) => a + b, 0);
+                const percentage = ((value / sum) * 100).toFixed(1) + "%";
                 return percentage;
             }
         }
@@ -51,7 +53,7 @@ const chartOptions = ref({
                 <div class="five__circles"><span style="background-color: #AE2831" /> Erros</div>
             </div>
         </div>
-        <CoreBtn>Responder novamente</CoreBtn>
+        <CoreBtn @click="emit('click')">Responder novamente</CoreBtn>
     </div>
 </template>
 
@@ -60,16 +62,16 @@ const chartOptions = ref({
     gap: 30px;
     display: flex;
     flex-direction: column;
-    align-items: center;
 
     &__chart-container {
-        width: 190px;
-        height: 190px;
+        width: 160px;
+        height: 160px;
     }
 
     &__graphic {
         display: flex;
         align-items: center;
+        justify-content: space-evenly;
         gap: 20px;
         background-color: $chineseBlack;
         padding: 10px;
@@ -79,12 +81,23 @@ const chartOptions = ref({
         color: white;
         font-size: 12px;
         margin: 8px 0;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+
 
         span {
             display: inline-block;
             width: 10px;
             height: 10px;
             border-radius: 50%;
+        }
+    }
+}
+
+@media (min-width: 1024px) {
+    .five {
+        &__graphic {
+            padding: 20px;
         }
     }
 }

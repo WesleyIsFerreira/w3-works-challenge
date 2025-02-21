@@ -2,6 +2,8 @@
 import { ref } from 'vue';
 import Editor from 'primevue/editor';
 
+const emit = defineEmits(["click"]);
+
 const questionThree = ref("");
 </script>
 
@@ -16,8 +18,8 @@ const questionThree = ref("");
 
         <Editor v-model="questionThree" editorStyle="height: 320px" />
 
-        <CoreBtn>
-            Finalizar
+        <CoreBtn @click="emit('click', questionThree)">
+            Proximo
         </CoreBtn>
     </div>
 </template>

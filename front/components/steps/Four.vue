@@ -1,3 +1,7 @@
+<script setup lang="ts">
+const emit = defineEmits(["click"]);
+</script>
+
 <template>
     <div class="four">
         <CoreTitle>Parabéns seu teste foi enviado com sucesso</CoreTitle>
@@ -5,7 +9,7 @@
             Em breve entraremos em contato com mais informações.
         </CoreParagraph>
 
-        <CoreBtn>
+        <CoreBtn @click="emit('click')">
             Ver resultado
         </CoreBtn>
     </div>

@@ -11,5 +11,6 @@
     color: $white;
     padding: 20px 0;
     background-color: $chineseBlack;
+    text-align: center;
 }
 </style>

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
+const emit = defineEmits(["click"]);
 
 const questionTwo = ref("Selecione a resposta");
 
@@ -37,7 +38,7 @@ const options = [{
             </option>
         </select>
 
-        <CoreBtn>
+        <CoreBtn @click="emit('click', questionTwo)">
             Proximo
         </CoreBtn>
 

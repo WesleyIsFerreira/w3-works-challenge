@@ -36,3 +36,30 @@ button {
   background: none;
   cursor: pointer;
 }
+
+/* Aplica a todas as barras de rolagem */
+::-webkit-scrollbar {
+    width: 6px; /* Largura da barra vertical */
+    height: 6px; /* Altura da barra horizontal */
+}
+
+/* Fundo da barra de rolagem */
+::-webkit-scrollbar-track {
+    background: #1e1e1e; /* Cor de fundo */
+    border-radius: 10px;
+}
+
+/* Cor da alça da barra de rolagem */
+::-webkit-scrollbar-thumb {
+    background: #FFFF00; /* Azul */
+    border-radius: 10px;
+}
+
+/* Quando passa o mouse na barra */
+::-webkit-scrollbar-thumb:hover {
+    background: #aeae00; /* Azul mais escuro */
+}
+
+input[type="radio"] {
+  accent-color: #FFFF00;
+}
