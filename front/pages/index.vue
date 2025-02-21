@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue';
+import { postRequest } from '~/utils/api';
 
 const screenWidth = ref(1024);
 const updateScreenSize = () => {
@@ -24,15 +25,31 @@ const form = ref({
     questThree: '',
 });
 
-const handleClick = (value: string = '') => {
+const data = ref([0, 0, 0]);
+
+const handleClick = async (value: string = '') => {
     if (activeStep.value === 1) {
         form.value.questOne = value;
     } else if (activeStep.value === 2) {
         form.value.questTwo = value;
     } else if (activeStep.value === 3) {
         form.value.questThree = value;
-    } else if (activeStep.value === 4) {
-        // Envia
+        loading.value = true
+
+        await new Promise(resolve => setTimeout(resolve, 2000));
+
+        try {
+            const result = await postRequest(form.value);
+            console.log('RESPOSTA', result);
+            loading.value = false;
+
+            data.value[0] = result.percentage.errors || 0
+            data.value[1] = result.percentage.correct || 0
+            data.value[2] = result.percentage.noAnswers || 0
+        } catch (error) {
+            loading.value = false
+            return
+        }
     }
 
     activeStep.value === 5 ? activeStep.value = 0 : activeStep.value++;
@@ -57,10 +74,12 @@ const handleClick = (value: string = '') => {
                 <StepsTwo v-else-if="activeStep === 2" @click="handleClick" />
                 <StepsThree v-else-if="activeStep === 3" @click="handleClick" />
                 <StepsFour v-else-if="activeStep === 4" @click="handleClick" />
-                <StepsFive v-else @click="handleClick" />
+                <StepsFive v-else @click="handleClick" :data="data" />
             </Transition>
         </div>
-        <CoreLoading v-if="loading" />
+        <Transition name="slide-up" mode="out-in">
+            <CoreLoading v-if="loading" />
+        </Transition>
     </div>
 </template>
 

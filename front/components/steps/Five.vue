@@ -8,6 +8,11 @@ import {
     CategoryScale
 } from "chart.js";
 import ChartDataLabels from "chartjs-plugin-datalabels";
+import { defineProps } from "vue";
+
+const props = defineProps<{
+    data: number[];
+}>();
 
 const emit = defineEmits(["click"]);
 
@@ -17,7 +22,7 @@ const chartData = ref({
     labels: ["Erros", "Acertos", "Sem respostas"],
     datasets: [
         {
-            data: [50, 30, 20],
+            data: props.data,
             backgroundColor: ["#AE2831", "#2A52F0", "#40C2E9"]
         }
     ]
@@ -28,13 +33,11 @@ const chartOptions = ref({
         datalabels: {
             color: "#fff",
             font: {
-                weight: "bold",
+                weight: 600,
                 size: 10
             },
             formatter: (value: number, ctx: any) => {
-                const sum = ctx.chart.data.datasets[0].data.reduce((a: number, b: number) => a + b, 0);
-                const percentage = ((value / sum) * 100).toFixed(1) + "%";
-                return percentage;
+                return value ? value + '%' : '';
             }
         }
     }

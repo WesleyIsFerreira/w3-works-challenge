@@ -38,7 +38,7 @@ const options = [{
             </option>
         </select>
 
-        <CoreBtn @click="emit('click', questionTwo)">
+        <CoreBtn @click="emit('click', questionTwo === 'Selecione a resposta' ? '' : questionTwo)">
             Proximo
         </CoreBtn>
 
