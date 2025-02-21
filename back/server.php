@@ -1,7 +1,18 @@
 <?php
+$host = 'localhost';
+$username = 'root'; 
+$password = ''; 
+$dbname = 'quiz_responses'; 
+
+$conn = new mysqli($host, $username, $password, $dbname);
+
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
 header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: GET, POST, OPTIONS"); 
-header("Access-Control-Allow-Headers: Content-Type"); 
+header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type");
 
 if ($_SERVER["REQUEST_METHOD"] === "OPTIONS") {
     http_response_code(200);
@@ -57,15 +68,37 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $percentageErrors = round(($incorrectAnswers / $total) * 100, 1);
     $percentageNoAnswers = round(($noAnswers / $total) * 100, 1);
 
-    echo json_encode([
-        "correctAnswers" => $correctAnswers,
-        "noAnswers" => $noAnswers,
-        "incorrectAnswers" => $incorrectAnswers,
-        "percentage" => [
-            "correct" => $percentageCorrect,
-            "noAnswers" => $percentageNoAnswers,
-            "errors" => $percentageErrors
-        ]
-    ]);
+    $stmt = $conn->prepare("INSERT INTO responses (questOne, questTwo, questThree, correctAnswers, incorrectAnswers, noAnswers, percentageCorrect, percentageErrors, percentageNoAnswers) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("sssiiiddd", $answers['questOne'], $answers['questTwo'], $answers['questThree'], $correctAnswers, $incorrectAnswers, $noAnswers, $percentageCorrect, $percentageErrors, $percentageNoAnswers);
+
+    if ($stmt->execute()) {
+        echo json_encode([
+            "correctAnswers" => $correctAnswers,
+            "noAnswers" => $noAnswers,
+            "incorrectAnswers" => $incorrectAnswers,
+            "percentage" => [
+                "correct" => $percentageCorrect,
+                "noAnswers" => $percentageNoAnswers,
+                "errors" => $percentageErrors
+            ]
+        ]);
+    } else {
+        echo json_encode(["error" => "Erro ao salvar no banco de dados"]);
+    }
+
+    $stmt->close();
 }
+
+if ($_SERVER["REQUEST_METHOD"] === "GET") {
+    $result = $conn->query("SELECT * FROM responses");
+
+    $responses = [];
+    while ($row = $result->fetch_assoc()) {
+        $responses[] = $row;
+    }
+
+    echo json_encode(["responses" => $responses]);
+}
+
+$conn->close();
 ?>
