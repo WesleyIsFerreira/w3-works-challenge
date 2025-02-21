@@ -17,18 +17,16 @@ Antes de começar, certifique-se de que você tem as seguintes ferramentas insta
 Após clonar o projeto para sua máquina local, navegue até a pasta `back` e execute os seguintes comandos para configurar o banco de dados e iniciar o servidor:
 
 ```bash
-php setup.php
 php -S localhost:8000
 ```
 
 O servidor backend estará rodando em http://localhost:8000.
 
-### 1. Frontend (Nuxt.js)
+### 2. Frontend (Nuxt.js)
 
 Em seguida, navegue até a pasta do frontend e instale as dependências com o comando:
 
 ```bash
-cd frontend
 npm install
 ```
 
